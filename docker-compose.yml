@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  db:
+    image: container-registry.oracle.com/database/enterprise:19.3.0.0
+    container_name: 19c
+    ports:
+      - 1521:1521
+      - 5500:5500
+      - 8080:8080
+    shm_size: 4G
+    volumes:
+      - type: bind
+        source: ./setup
+        target: /opt/oracle/scripts/setup
+    environment:
+      - ORACLE_SID=ORCLCDB
+      - ORACLE_PDB=ORCLPDB1
+      - ORACLE_PWD=pass
+      - NLS_LANG=Japanese_Japan.UTF8
+      - TZ=Asia/Tokyo
